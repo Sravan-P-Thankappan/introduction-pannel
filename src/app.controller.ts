@@ -1,12 +1,15 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Request } from 'express';
+import { RoomCapacity } from './dto/room.dto';
 
-@Controller()
+
+@Controller('room')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Post('people')
+  setRoomCapacity(@Body() roomCapacity: RoomCapacity) {
+    return this.appService.setRoomCapacity(roomCapacity);
   }
 }
